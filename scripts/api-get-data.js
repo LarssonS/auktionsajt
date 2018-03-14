@@ -9,11 +9,11 @@ async function GetData()
 for (var i = 0; i < response.length; i++) {
   response[i]
 
-  let auktionUl=document.createElement("ul");
+    let auktionUl=document.createElement("ul");
     let auktionPTag = document.createElement("li");
     let auktionText = document.createTextNode(response[i].AuktionID + response[i].Beskrivning +response[i].SlutDatum + response [i].StartDatum + response[i].Titel + response[i].Utropspris);
-    auktionPTag.appendChild(auktionText);
-    auktionUl.appendChild(auktionPTag)
+    auktionUl.appendChild(auktionPTag);
+    auktionUl.appendChild(auktionUl)
     document.body.appendChild(auktionUl);
 }
 
@@ -38,6 +38,7 @@ async function FetchData(url)
   return data;
 }
 
+
 function postData(){
 fetch("http://nackowskis.azurewebsites.net/api/auktion/",{
  method: 'POST',
@@ -61,3 +62,21 @@ fetch("http://nackowskis.azurewebsites.net/api/auktion/",{
 }
 
 //postData();
+
+function deleteData(){
+fetch("http://nackowskis.azurewebsites.net/api/auktion/600/471",{
+ method: 'DELETE',
+ body: JSON.stringify({
+      "AuktionID": 471,
+       "Gruppkod": 600,
+     }),
+
+ headers: {
+ 'Accept': 'application/json, text/plain, */*',
+ 'Content-Type': 'application/json'
+ }
+ }).then(function (data) {
+ console.log('Request success: ', 'posten skapad');
+})
+}
+deleteData();
