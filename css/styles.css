@@ -1,0 +1,36 @@
+* {
+	box-sizing: border-box;
+}
+
+h1,h2,h3,p {
+	margin: 0;
+}
+
+h1 {
+	font-size: 18px;
+}
+
+h3 {
+	font-size: 16px;
+}
+.container {
+	max-width: 960px;
+	margin: auto;
+}
+
+.auktion-div {
+	background: #d6d8db;
+	padding: 25px;
+	margin: 15px;
+	float: left;
+	height: 250px;
+	width: 29%;
+}
+
+.btn-style {
+	float: right;
+}
+
+.clear-fix {
+	clear: both;
+}
