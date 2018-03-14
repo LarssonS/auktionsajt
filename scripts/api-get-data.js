@@ -9,26 +9,21 @@ async function GetData()
 for (var i = 0; i < response.length; i++) {
   response[i]
 
-    let auktionUl=document.createElement("ul");
-    let auktionPTag = document.createElement("li");
-    let auktionText = document.createTextNode(response[i].AuktionID + response[i].Beskrivning +response[i].SlutDatum + response [i].StartDatum + response[i].Titel + response[i].Utropspris);
-    auktionUl.appendChild(auktionPTag);
-    auktionUl.appendChild(auktionUl)
-    document.body.appendChild(auktionUl);
+  let auktionh1=document.createElement("h1");
+  let auktionh1Text=document.createTextNode(response[i].Beskrivning);
+  auktionh1.appendChild(auktionh1Text);
+  document.body.appendChild(auktionh1);
+
+  let auktionText=document.createElement("p");
+  let auktionPtag=document.createTextNode(response[i].SlutDatum + response [i].StartDatum + response[i].Titel + response[i].Utropspris]);
+  auktionPtag.appendChild(auktionDiv);
+document.body.appe
+  let auktionDiv=document.createElement("div");
+  auktionDiv.appendChild(auktionh1);
+  document.body.appendChild(auktionDiv);
+
 }
 
-/*  let auktionPTag = document.createElement("p");
-  let auktionText = document.createTextNode(response[i].AuktionID + response[i].Beskrivning +response[i].SlutDatum + response [i].StartDatum + response[i].Titel + response[i].Utropspris);
-  auktionPTag.appendChild(auktionText);
-  document.body.appendChild(auktionPTag);
-}
-  /*for (var auktion of response)
-  {
-    let auktionPTag = document.createElement("p");
-    let auktionText = document.createTextNode(auktion);
-    auktionPTag.appendChild(auktionText);
-    document.body.appendChild(auktionPTag);
-  }*/
 }
 
 async function FetchData(url)
@@ -37,7 +32,6 @@ async function FetchData(url)
   let data = await promise.json();
   return data;
 }
-
 
 function postData(){
 fetch("http://nackowskis.azurewebsites.net/api/auktion/",{
@@ -60,9 +54,9 @@ fetch("http://nackowskis.azurewebsites.net/api/auktion/",{
  console.log('Request success: ', 'posten skapad');
 })
 }
-
 //postData();
 
+//Funktion för att ta bort data
 function deleteData(){
 fetch("http://nackowskis.azurewebsites.net/api/auktion/600/471",{
  method: 'DELETE',
@@ -79,4 +73,4 @@ fetch("http://nackowskis.azurewebsites.net/api/auktion/600/471",{
  console.log('Request success: ', 'posten skapad');
 })
 }
-deleteData();
+//deleteData();
