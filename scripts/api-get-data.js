@@ -21,7 +21,7 @@ async function GetData() {
 		auktionDiv.appendChild(auktionH3);
 
 		let auktionP = document.createElement("p");
-		let textP = document.createTextNode("Start datum: " + currentObject.StartDatum + " Slut datum: " + currentObject.SlutDatum);
+		let textP = document.createTextNode("Start datum: " + currentObject.StartDatum.replace('T',' ') + " Slut datum: " + currentObject.SlutDatum.replace('T',' '));
 		auktionP.appendChild(textP);
 		auktionDiv.appendChild(auktionP);
 
