@@ -3,8 +3,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>auktionssajt</title>
+	<script src="scripts/api-get-data.js" defer></script>
+	<script src="scripts/api-post-data.js" defer></script>
+	<script src="scripts/main.js" defer></script>
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	
+<h1>Welcome to Auction</h1>
+
+<div class="topnav">
+  <a href="#about">Price</a>
+  <a href="#contact">Date</a>
+  <div class="search-container">
+    <form>
+      <input id="search" type="text" placeholder="Search.." name="search" >
+      <button id="searchButton" type="submit"><i class="fa fa-search" onclick="myFunction()"></i></button>
+    </form>
+  </div>
+</div> 
+
+    </div>
+<div id="searchResult"></div>
+	<div id="titel" class="container"></div>
+	<div class="clear-fix"></div>
 </body>
 </html>
