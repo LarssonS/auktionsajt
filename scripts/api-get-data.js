@@ -91,6 +91,37 @@ function deleteData(){
 }
 /*deleteData();*/
 
+function myFunction() {
 
+  var input = document.getElementById("Search");
+  var filter = input.value.toLowerCase();
+  var nodes = document.getElementsByClassName('auktion-div');
 
+  for (i = 0; i < nodes.length; i++) {
+    if (nodes[i].textContent.toLowerCase().includes(filter)) {
+    		console.log('tja');
+        	nodes[i].style.visibility = 'visible';
+    	} 
+	else {
 
+      	nodes[i].style.visibility = 'hidden';
+
+    }
+  }
+}
+
+/*function myFunction() {
+    var input = document.getElementById("Search");
+    var filter = input.value.toUpperCase();
+    var length = document.getElementsByClassName('auktion-div').length;
+
+    for (i=0; i<length; i++){
+if(document.getElementsByClassName('auktion-div')[i].innerHTML.toUpperCase().indexOf(filter) > -1) {     
+    document.getElementsByClassName("auktion-div")[i].style.display = "block";
+    break;
+            }
+        else{
+            document.getElementsByClassName("auktion-div")[i].style.display = "none";
+        } 
+    }
+} */
