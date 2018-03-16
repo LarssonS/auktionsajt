@@ -99,16 +99,61 @@ function myFunction() {
 
   for (i = 0; i < nodes.length; i++) {
     if (nodes[i].textContent.toLowerCase().includes(filter)) {
-    		console.log('tja');
-        	nodes[i].style.visibility = 'visible';
+        	nodes[i].style.display = 'block';
     	} 
 	else {
 
-      	nodes[i].style.visibility = 'hidden';
-
+      	nodes[i].style.display = 'none';
     }
   }
 }
+
+function comparePrice(a,b){
+
+	var valueA = Number(a.querySelectorAll('p')[2].innerHTML.replace("Utropspris: ", ""));
+	var valueB = Number(b.querySelectorAll('p')[2].innerHTML.replace("Utropspris: ", ""));;
+	
+
+	  if (valueA < valueB){
+         return -1;
+	  } if (valueA > valueB){
+        return 1;
+	  }
+    return 0;
+}
+
+function compareDate(a,b){
+
+	var valueA = new Date(a.querySelectorAll('p')[0].innerHTML.replace("Start datum: ", ""));
+	var valueB = new Date(b.querySelectorAll('p')[0].innerHTML.replace("Start datum: ", ""));
+	
+
+	  if (valueA < valueB){
+         return -1;
+	  } if (valueA > valueB){
+        return 1;
+	  }
+    return 0;
+
+}
+
+function sort(orderBy){
+	const items = Array.prototype.slice.call(document.querySelectorAll('.auktion-div'));
+	console.log(items);
+	document.querySelector('#titel').innerHTML = '';
+
+	if(orderBy === 'price'){
+		items.sort(comparePrice);
+	}else if (orderBy === 'date') {
+		items.sort(compareDate);
+	}
+
+//Display for user
+for (const item of items){
+	document.querySelector('#titel').appendChild(item);
+}
+}
+
 
 /*function myFunction() {
     var input = document.getElementById("Search");
