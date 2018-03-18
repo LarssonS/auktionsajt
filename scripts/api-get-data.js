@@ -2,7 +2,7 @@ GetData();
 async function GetData() {
 	let auktion = await fetchData('http://nackowskis.azurewebsites.net/api/Auktion/600/');
 	let bud = await fetchData('http://nackowskis.azurewebsites.net/api/Bud/600/6/');
-
+console.log(bud);
 
 	let firstAuction = document.getElementById("titel");
 
@@ -94,6 +94,9 @@ function deleteData(){
 }
 /*deleteData();*/
 
+
+
+// SÖK funktionen
 function myFunction() {
 
   var input = document.getElementById("Search");
@@ -111,6 +114,8 @@ function myFunction() {
   }
 }
 
+
+// Funktionen som jämför priserna med varandra
 function comparePrice(a,b){
 
 	var valueA = Number(a.querySelectorAll('p')[2].innerHTML.replace("Utropspris: ", ""));
@@ -125,6 +130,7 @@ function comparePrice(a,b){
     return 0;
 }
 
+// Funktionen som jämför datumen med varandra
 function compareDate(a,b){
 
 	var valueA = new Date(a.querySelectorAll('p')[0].innerHTML.replace("Start datum: ", ""));
@@ -140,17 +146,23 @@ function compareDate(a,b){
 
 }
 
+// Funktionen som kallar på compareDate() eller comparePrice() beroende på vilken knapp du trycker
 function sort(orderBy){
+	// Omvandlar items till en array 
 	const items = Array.prototype.slice.call(document.querySelectorAll('.auktion-div'));
+	// Tömmer hela listan för att kunna displaya det användaren sökt
 	document.querySelector('#titel').innerHTML = '';
-
+    
+    // Om användaren klickar på Pris knappen så kallar sort funktionen på comparePrice()
 	if(orderBy === 'price'){
 		items.sort(comparePrice);
+
+	// Om användaren klickar på Datum knappen så kallar sort funktionen på compareDate()
 	}else if (orderBy === 'date') {
 		items.sort(compareDate);
 	}
 
-//Display for user
+//Displayar så användaren kan se resultatet på sökningen 
 for (const item of items){
 	document.querySelector('#titel').appendChild(item);
 }
