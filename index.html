@@ -13,12 +13,12 @@
 <h1>Welcome to Auction</h1>
 
 <div class="topnav">
-  <a onclick="sort('price')">Price</a>
-  <a onclick="sort('date')">Date</a>
+  <button class="sort-button" onclick="sort('price')">Pris</button>
+  <button class="sort-button" onclick="sort('date')">Datum</button>
   <div class="search-container">
     
-      <input type="text" id="Search" type="text" placeholder="Search.." name="search" >
-      <a href="#" onclick="myFunction()">sök</a>
+      <input type="text" id="Search" type="text" placeholder="Sök.." name="search" >
+     <button class="button" type="submit" onclick="myFunction()"><i class="fa fa-search"></i></button>
 <!--       <button id="searchButton" type="submit" onclick="myFunction()"><i class="fa fa-search"></i></button>
  -->   
   </div>

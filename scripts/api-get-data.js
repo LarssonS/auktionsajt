@@ -38,9 +38,11 @@ async function GetData() {
         var auctionEndDate = new Date(currentObject.SlutDatum);
 		let auktionInput = document.createElement("input");
 		let auktionBtn = document.createElement("button");
-		auktionBtn.innerHTML = "Show more";
-		auktionBtn.classList.add("btn-style");
-		auktionInput.classList.add("btn-style");
+		auktionBtn.innerHTML = "Lägg bud";
+		auktionBtn.classList.add("bid-container");
+		auktionInput.classList.add("bid-container");
+		auktionBtn.classList.add("bid-button");
+		auktionInput.classList.add("input-container");
 		firstAuction.appendChild(auktionDiv);
 		   if(auctionEndDate > today){
 		      auktionDiv.appendChild(auktionInput);
@@ -139,7 +141,6 @@ function compareDate(a,b){
 
 function sort(orderBy){
 	const items = Array.prototype.slice.call(document.querySelectorAll('.auktion-div'));
-	console.log(items);
 	document.querySelector('#titel').innerHTML = '';
 
 	if(orderBy === 'price'){

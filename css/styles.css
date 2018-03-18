@@ -7,18 +7,6 @@ body{
 	box-sizing: border-box;
 }
 
-.show{
-  visibility: visible;
-}
-
-.hide{
-  visibility: hidden;
-}
-
-.auktion-div{
-  visibility: visible;
-}
-
 h1,h2,h3,p {
 	margin: 0;
 	text-align: center;
@@ -31,7 +19,6 @@ p{
 }
 
 h1 {
-	text-align: center;
 	padding: 50px;
 }
 h2{
@@ -54,10 +41,6 @@ h3 {
 	height: 250px;
 }
 
-.btn-style {
- 	
-}
-
 .clear-fix {
 	clear: both;
 }
@@ -68,40 +51,26 @@ h3 {
   background-color: #F6F6F6;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
-
-.topnav a {
-  float: left;
-  display: block;
-  color: #55555c;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-
-.topnav .search-container {
-
+.topnav > div{
+  margin: 0 10px;
 }
 
 .topnav input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
+ padding: 8px;
+  /* margin-top: 6px;*/
   font-size: 17px;
   border: none;
 }
 
 .topnav .search-container button {
   float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
+ padding: 8px 10px;
+  /* 
+  margin-top: 6px;
+  
+  margin-right: 16px;*/
   background: #ddd;
   font-size: 17px;
   border: none;
@@ -112,22 +81,39 @@ h3 {
   background: #ccc;
 }
 
-@media screen and (max-width: 600px) {
-  .topnav .search-container {
-    float: none;
-  }
-  .topnav a, .topnav input[type=text], .topnav .search-container button {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type=text] {
-    border: 1px solid #ccc;  
-  }
+  .sort-button{
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 14px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.sort-button:hover {opacity: 1}
 
-  .UtropsPris{
-  	padding-bottom: 30px;
-  }
+.input-container{
+    padding: 5px;
+  border: none;
+  width: 10%;
+  background-color: white;
+}
+.bid-container{
+  margin-top: 15px;
+}
+.bid-button{
+    background-color: #f4511e;
+  border: none;
+  color: white;
+padding: 5px;
+margin: 0 5px;
+  opacity: 0.6;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+
+}
