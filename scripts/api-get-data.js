@@ -10,7 +10,7 @@ async function GetData() {
 		let auktionDiv = document.createElement("div");
 		auktionDiv.classList.add("auktion-div");
 
-		let auktionH1 = document.createElement("h1");
+		let auktionH1 = document.createElement("h2");
 		let textH1 = document.createTextNode(currentObject.Titel);
 		auktionH1.appendChild(textH1);
 		auktionDiv.appendChild(auktionH1);
@@ -20,22 +20,34 @@ async function GetData() {
 		auktionH3.appendChild(textH3);
 		auktionDiv.appendChild(auktionH3);
 
-		let auktionP = document.createElement("p");
-		let textP = document.createTextNode("Start datum: " + currentObject.StartDatum + " Slut datum: " + currentObject.SlutDatum);
-		auktionP.appendChild(textP);
-		auktionDiv.appendChild(auktionP);
+		let auktionSlut = document.createElement("p");
+		let auktionStart = document.createElement("p");
+		let textStart = document.createTextNode("Start datum: " + currentObject.StartDatum.replace('T',' '));
+		let textSlut = document.createTextNode("Slut datum: " + currentObject.SlutDatum.replace('T',' '));
+		auktionStart.appendChild(textStart);
+		auktionSlut.appendChild(textSlut);
+		auktionDiv.appendChild(auktionStart);
+		auktionDiv.appendChild(auktionSlut);
 
 		let auktionPrice = document.createElement("p");
 		let textPrice = document.createTextNode("Utropspris: " + currentObject.Utropspris);
 		auktionPrice.appendChild(textPrice);
 		auktionDiv.appendChild(auktionPrice);
 
-		let auktionBtn = document.createElement("input");
-		auktionBtn.type = "submit";
-		auktionBtn.value = "Show bids";
+    var today = new Date();
+    var auctionEndDate = new Date(currentObject.SlutDatum);
+		let auktionInput = document.createElement("input");
+		let auktionBtn = document.createElement("button");
+		auktionBtn.innerHTML = "Show more";
 		auktionBtn.classList.add("btn-style");
+		auktionInput.classList.add("btn-style");
+		
+    let auktionBtnShowBids = document.createElement("input");
+		auktionBtnShowBids.type = "submit";
+		auktionBtnShowBids.value = "Show bids";
+		auktionBtnShowBids.classList.add("btn-style");
 
-		auktionBtn.addEventListener("click", async function() {
+		auktionBtnShowBids.addEventListener("click", async function() {
 			var currentBidSearch = 'http://nackowskis.azurewebsites.net/api/Bud/600/' + currentObject.AuktionID + "/";	
 			var currentBidSearchResult = await apiCall(currentBidSearch);
 			
@@ -52,10 +64,33 @@ async function GetData() {
 			})
 		})
 
-		auktionDiv.appendChild(auktionBtn);
+		auktionDiv.appendChild(auktionBtnShowBids);
+
+    firstAuction.appendChild(auktionDiv);
+		   if(auctionEndDate > today){
+		      auktionDiv.appendChild(auktionInput);
+		      auktionDiv.appendChild(auktionBtn);
+	    } else {
+	    	let auktionText = document.createElement("p");
+	    	let textBud = document.createTextNode("KLAR!");
+		    auktionText.appendChild(textBud);
+		    auktionDiv.appendChild(auktionText);	
+	    }
+/*        var today = new Date();
+        var auctionEndDate = new Date(currentObject.SlutDatum);
+        if(auctionEndDate > today){
+		let priceFilterButton = document.createElement("button");
+		priceFilterButton.innerHTML = "Price";
+		priceFilterButton.classList.add("btn-style");
+		auktionDiv.appendChild(priceFilterButton);
 		firstAuction.appendChild(auktionDiv);
+}*/
 	})
 }
+
+
+
+
 
 async function fetchData(url)
 {
@@ -85,3 +120,7 @@ function deleteData(){
 	})
 }
 /*deleteData();*/
+
+
+
+
