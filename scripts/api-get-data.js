@@ -38,7 +38,7 @@ async function GetData() {
         var auctionEndDate = new Date(currentObject.SlutDatum);
 		let auktionInput = document.createElement("input");
 		let auktionBtn = document.createElement("button");
-		auktionBtn.innerHTML = "Lägg bud";
+		auktionBtn.innerHTML = "Buda";
 		auktionBtn.classList.add("bid-container");
 		auktionInput.classList.add("bid-container");
 		auktionBtn.classList.add("bid-button");
@@ -49,7 +49,8 @@ async function GetData() {
 		      auktionDiv.appendChild(auktionBtn);
 	    } else {
 	    	let auktionText = document.createElement("p");
-	    	let textBud = document.createTextNode("KLAR!");
+	    	let textBud = document.createTextNode("Auktion över!");
+	    	auktionText.classList.add("bid-over");
 		    auktionText.appendChild(textBud);
 		    auktionDiv.appendChild(auktionText);	
 	    }

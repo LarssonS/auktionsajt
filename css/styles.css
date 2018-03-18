@@ -97,9 +97,9 @@ h3 {
 .sort-button:hover {opacity: 1}
 
 .input-container{
-    padding: 5px;
+    padding: 6px;
   border: none;
-  width: 10%;
+  width: 8%;
   background-color: white;
 }
 .bid-container{
@@ -109,11 +109,16 @@ h3 {
     background-color: #f4511e;
   border: none;
   color: white;
-padding: 5px;
+padding: 6px;
 margin: 0 5px;
   opacity: 0.6;
   transition: 0.3s;
   text-decoration: none;
   cursor: pointer;
+}
+.bid-button:hover {opacity: 1}
 
+.bid-over{
+  font-size: 25px;
+  font-style: bold;
 }
