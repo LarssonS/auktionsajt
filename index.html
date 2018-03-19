@@ -10,25 +10,22 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-  
-<h1>Welcome to Auction</h1>
+	<h1>Välkommen till Nackowskis</h1>
 
-<div class="topnav">
-  <a href="#about">Price</a>
-  <a href="#contact">Date</a>
-  <div class="search-container">
-    <form>
-      <input id="search" type="text" placeholder="Search.." name="search" >
-      <button id="searchButton" type="submit"><i class="fa fa-search" onclick="myFunction()"></i></button>
-    </form>
-  </div>
-</div> 
 
-    </div>
-<div id="searchResult"></div>
+	<div class="topnav">
+		<div class="search-container">
+			
+			<input type="text" id="Search" type="text" placeholder="Sök.." name="search" >
+			<button class="button" type="submit" onclick="myFunction()"><i class="fa fa-search"></i></button>
+
+		</div>
+		<button class="sort-button" onclick="sort('price')">Pris</button>
+		<button class="sort-button" onclick="sort('date')">Datum</button>
+	</div> 
+
+	<div id="searchResult"></div>
 	<div id="titel" class="container"></div>
-	<div id="bid"></div>
 	<div class="clear-fix"></div>
-
 </body>
 </html>
