@@ -1,6 +1,6 @@
  GetData();
  async function GetData() {
- 	let auktion = await fetchData('http://nackowskis.azurewebsites.net/api/Auktion/600/');
+ 	let auktion = await fetchData('https://nackowskis.azurewebsites.net/api/Auktion/600/');
  	
  	let firstAuction = document.getElementById("titel");
 
@@ -47,7 +47,7 @@
  		firstAuction.appendChild(auktionDiv);
 
  		auktionBtn.addEventListener("click", async function(){
- 			let checkBids = "http://nackowskis.azurewebsites.net/api/bud/600/" + currentObject.AuktionID;
+ 			let checkBids = "https://nackowskis.azurewebsites.net/api/bud/600/" + currentObject.AuktionID;
  			let checkCurrentBids = await apiCall(checkBids);
  			let bidValue = auktionInput.value;
  			
@@ -87,7 +87,7 @@
 
  		auktionBtnShowBids.addEventListener("click", async function() {
  			
- 			var currentBidSearch = 'http://nackowskis.azurewebsites.net/api/Bud/600/' + currentObject.AuktionID + "/";	
+ 			var currentBidSearch = 'https://nackowskis.azurewebsites.net/api/Bud/600/' + currentObject.AuktionID + "/";	
  			var currentBidSearchResult = await apiCall(currentBidSearch);
  			currentBidSearchResult.sort((a, b) => a.Summa < b.Summa);
  			
@@ -137,7 +137,7 @@ async function apiCall (stringUrl) {
 }
 
 function deleteData(){
-	fetch("http://nackowskis.azurewebsites.net/api/auktion/600/459",{
+	fetch("https://nackowskis.azurewebsites.net/api/auktion/600/459",{
 		method: 'DELETE',
 		body: JSON.stringify({
 			"AuktionID": 459,
@@ -156,7 +156,7 @@ function deleteData(){
 // Lägg till bud funktionen
 
 function addBids(auctionId, bidValue){
-	fetch("http://nackowskis.azurewebsites.net/api/bud/600/",{
+	fetch("https://nackowskis.azurewebsites.net/api/bud/600/",{
 		method: 'post',
 		body: JSON.stringify({
 			"AuktionID": auctionId,
