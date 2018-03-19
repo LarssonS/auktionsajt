@@ -41,7 +41,7 @@
  		auktionInput.classList.add("input-container");
 
  		let auktionBtn = document.createElement("button");
- 		auktionBtn.innerHTML = "Buda";
+ 		auktionBtn.innerHTML = "Lägg bud";
  		auktionBtn.classList.add("bid-container");
  		auktionBtn.classList.add("bid-button");
  		firstAuction.appendChild(auktionDiv);
@@ -55,7 +55,7 @@
  			let highestBid = checkCurrentBids.reduce((a, b) => a.Summa > b.Summa ? a:b);
 
  			if (bidValue > highestBid.Summa) {
- 				/*addBids(currentObject.AuktionID, bidValue);*/
+ 				addBids(currentObject.AuktionID, bidValue);
  			}
 
  			else {
