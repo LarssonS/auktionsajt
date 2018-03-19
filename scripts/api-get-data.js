@@ -1,96 +1,128 @@
-GetData();
-async function GetData() {
-	let auktion = await fetchData('http://nackowskis.azurewebsites.net/api/Auktion/600/');
-	console.log(auktion);
+ GetData();
+ async function GetData() {
+ 	let auktion = await fetchData('http://nackowskis.azurewebsites.net/api/Auktion/600/');
+ 	
+ 	let firstAuction = document.getElementById("titel");
 
-	let firstAuction = document.getElementById("titel");
-	let bidAuction = document.getElementById("bid");
+ 	auktion.forEach(currentObject => {
+ 		let auktionDiv = document.createElement("div");
+ 		auktionDiv.classList.add("auktion-div");
 
-	auktion.forEach(currentObject => {
-		let auktionDiv = document.createElement("div");
-		auktionDiv.classList.add("auktion-div");
+ 		let auktionH1 = document.createElement("h2");
+ 		let textH1 = document.createTextNode(currentObject.Titel);
+ 		auktionH1.appendChild(textH1);
+ 		auktionDiv.appendChild(auktionH1);
 
-		let auktionH1 = document.createElement("h2");
-		let textH1 = document.createTextNode(currentObject.Titel);
-		auktionH1.appendChild(textH1);
-		auktionDiv.appendChild(auktionH1);
+ 		let auktionH3 = document.createElement("h3");
+ 		let textH3 = document.createTextNode(currentObject.Beskrivning);
+ 		auktionH3.appendChild(textH3);
+ 		auktionDiv.appendChild(auktionH3);
 
-		let auktionH3 = document.createElement("h3");
-		let textH3 = document.createTextNode(currentObject.Beskrivning);
-		auktionH3.appendChild(textH3);
-		auktionDiv.appendChild(auktionH3);
+ 		let auktionSlut = document.createElement("p");
+ 		let auktionStart = document.createElement("p");
+ 		let textStart = document.createTextNode("Start datum: " + currentObject.StartDatum.replace('T',' '));
+ 		let textSlut = document.createTextNode("Slut datum: " + currentObject.SlutDatum.replace('T',' '));
+ 		auktionStart.appendChild(textStart);
+ 		auktionSlut.appendChild(textSlut);
+ 		auktionDiv.appendChild(auktionStart);
+ 		auktionDiv.appendChild(auktionSlut);
 
-		let auktionSlut = document.createElement("p");
-		let auktionStart = document.createElement("p");
-		let textStart = document.createTextNode("Start datum: " + currentObject.StartDatum.replace('T',' '));
-		let textSlut = document.createTextNode("Slut datum: " + currentObject.SlutDatum.replace('T',' '));
-		auktionStart.appendChild(textStart);
-		auktionSlut.appendChild(textSlut);
-		auktionDiv.appendChild(auktionStart);
-		auktionDiv.appendChild(auktionSlut);
+ 		let auktionPrice = document.createElement("p");
+ 		let textPrice = document.createTextNode("Utropspris: " + currentObject.Utropspris);
+ 		auktionPrice.appendChild(textPrice);
+ 		auktionDiv.appendChild(auktionPrice);
 
-		let auktionPrice = document.createElement("p");
-		let textPrice = document.createTextNode("Utropspris: " + currentObject.Utropspris);
-		auktionPrice.appendChild(textPrice);
-		auktionDiv.appendChild(auktionPrice);
+ 		var today = new Date();
+ 		var auctionEndDate = new Date(currentObject.SlutDatum);
+ 		
+ 		let auktionInput = document.createElement("input");
+ 		auktionInput.type = "text";
+ 		auktionInput.classList.add("bid-container");
+ 		auktionInput.classList.add("input-container");
 
-    var today = new Date();
-    var auctionEndDate = new Date(currentObject.SlutDatum);
-		let auktionInput = document.createElement("input");
-		let auktionBtn = document.createElement("button");
-		auktionBtn.innerHTML = "Show more";
-		auktionBtn.classList.add("btn-style");
-		auktionInput.classList.add("btn-style");
-		
-    let auktionBtnShowBids = document.createElement("input");
-		auktionBtnShowBids.type = "submit";
-		auktionBtnShowBids.value = "Show bids";
-		auktionBtnShowBids.classList.add("btn-style");
+ 		let auktionBtn = document.createElement("button");
+ 		auktionBtn.innerHTML = "Buda";
+ 		auktionBtn.classList.add("bid-container");
+ 		auktionBtn.classList.add("bid-button");
+ 		firstAuction.appendChild(auktionDiv);
 
-		auktionBtnShowBids.addEventListener("click", async function() {
-			var currentBidSearch = 'http://nackowskis.azurewebsites.net/api/Bud/600/' + currentObject.AuktionID + "/";	
-			var currentBidSearchResult = await apiCall(currentBidSearch);
-			
+ 		auktionBtn.addEventListener("click", async function(){
+ 			let checkBids = "http://nackowskis.azurewebsites.net/api/bud/600/" + currentObject.AuktionID;
+ 			let checkCurrentBids = await apiCall(checkBids);
+ 			let bidValue = auktionInput.value;
+ 			
+ 			let errorBid = document.createElement("div");
+ 			let highestBid = checkCurrentBids.reduce((a, b) => a.Summa > b.Summa ? a:b);
 
-			currentBidSearchResult.sort((a, b) => a.Summa < b.Summa);
-			currentBidSearchResult.forEach(currentBid => {
-				var bidDiv = document.createElement("div");
-				
-				var bidP = document.createElement("p");
-				var bidTextP = document.createTextNode("Bud: " + currentBid.Summa + " kr");
-				bidP.appendChild(bidTextP);
-				bidDiv.appendChild(bidP);
-				auktionDiv.appendChild(bidDiv);
-			})
-		})
+ 			if (bidValue > highestBid.Summa) {
+ 				/*addBids(currentObject.AuktionID, bidValue);*/
+ 			}
 
-		auktionDiv.appendChild(auktionBtnShowBids);
+ 			else {
+ 				let toLowBid = document.createElement("h3");
+ 				let toLowBidText = document.createTextNode("Lägg ett högre bud, nuvarande bud är : " + highestBid.Summa);
+ 				toLowBid.appendChild(toLowBidText);
+ 				auktionDiv.appendChild(toLowBid);
+ 			}
+ 		})
 
-    firstAuction.appendChild(auktionDiv);
-		   if(auctionEndDate > today){
-		      auktionDiv.appendChild(auktionInput);
-		      auktionDiv.appendChild(auktionBtn);
-	    } else {
-	    	let auktionText = document.createElement("p");
-	    	let textBud = document.createTextNode("KLAR!");
-		    auktionText.appendChild(textBud);
-		    auktionDiv.appendChild(auktionText);	
-	    }
-/*        var today = new Date();
-        var auctionEndDate = new Date(currentObject.SlutDatum);
-        if(auctionEndDate > today){
-		let priceFilterButton = document.createElement("button");
-		priceFilterButton.innerHTML = "Price";
-		priceFilterButton.classList.add("btn-style");
-		auktionDiv.appendChild(priceFilterButton);
-		firstAuction.appendChild(auktionDiv);
-}*/
-	})
+
+ 		if(auctionEndDate > today){
+ 			auktionDiv.appendChild(auktionInput);
+ 			auktionDiv.appendChild(auktionBtn);
+ 		} else {
+ 			let auktionText = document.createElement("p");
+ 			let textBud = document.createTextNode("Auktion över!");
+ 			auktionText.classList.add("bid-over");
+ 			auktionText.appendChild(textBud);
+ 			auktionDiv.appendChild(auktionText);	
+ 		}
+
+ 		let auktionBtnShowBids = document.createElement("input");
+ 		auktionBtnShowBids.type = "submit";
+ 		auktionBtnShowBids.value = "Visa bud";
+ 		auktionBtnShowBids.classList.add("bid-container");
+ 		auktionBtnShowBids.classList.add("bid-button");
+
+
+ 		auktionBtnShowBids.addEventListener("click", async function() {
+ 			
+ 			var currentBidSearch = 'http://nackowskis.azurewebsites.net/api/Bud/600/' + currentObject.AuktionID + "/";	
+ 			var currentBidSearchResult = await apiCall(currentBidSearch);
+ 			currentBidSearchResult.sort((a, b) => a.Summa < b.Summa);
+ 			
+ 			auktionDiv.innerHTML = "";
+ 			auktionDiv.appendChild(auktionH1);
+
+ 			if (auctionEndDate > today) {
+ 				auktionDiv.appendChild(auktionInput);
+ 				auktionDiv.appendChild(auktionBtn);
+ 			}
+ 			else{
+ 				var bidWin = document.createElement("h3");
+ 				var bidTextWin = document.createTextNode("Vinnande bud: " + currentBidSearchResult[0].Summa);
+ 				bidWin.appendChild(bidTextWin);
+ 				auktionDiv.appendChild(bidWin);
+ 			}
+
+ 			auktionDiv.appendChild(auktionBtnShowBids);
+
+ 			currentBidSearchResult.forEach(currentBid => {
+ 				var bidDiv = document.createElement("div");
+
+ 				var bidP = document.createElement("p");
+ 				var bidTextP = document.createTextNode("Bud: " + currentBid.Summa + " kr");
+ 				bidP.appendChild(bidTextP);
+ 				
+ 				bidDiv.appendChild(bidP);
+
+ 				auktionDiv.appendChild(bidDiv);
+ 			})
+ 		})
+ 		auktionDiv.appendChild(auktionBtnShowBids);
+
+ 	})
 }
-
-
-
-
 
 async function fetchData(url)
 {
@@ -121,6 +153,88 @@ function deleteData(){
 }
 /*deleteData();*/
 
+// Lägg till bud funktionen
 
+function addBids(auctionId, bidValue){
+	fetch("http://nackowskis.azurewebsites.net/api/bud/600/",{
+		method: 'post',
+		body: JSON.stringify({
+			"AuktionID": auctionId,
+			"Summa": bidValue,
+		}),
+		headers: {
+			'Accept': 'application/json, text/plain, */*',
+			'Content-Type': 'application/json'
+		}
+	}).then(function (data) {
+		console.log('Request success: ', 'posten skapad');
+	})
+}
 
+// SÖK funktionen
+function myFunction() {
 
+	var input = document.getElementById("Search");
+	var filter = input.value.toLowerCase();
+	var nodes = document.getElementsByClassName('auktion-div');
+	for (i = 0; i < nodes.length; i++) {
+		if (nodes[i].textContent.toLowerCase().includes(filter)) {
+			nodes[i].style.display = 'block'; 
+		} 
+		else {
+			nodes[i].style.display = 'none';
+		}
+	}
+}
+
+// Funktionen som jämför priserna med varandra
+function comparePrice(a,b) {
+
+	var valueA = Number(a.querySelectorAll('p')[2].innerHTML.replace("Utropspris: ", ""));
+	var valueB = Number(b.querySelectorAll('p')[2].innerHTML.replace("Utropspris: ", ""));;
+	
+	if (valueA < valueB) {
+		return -1;
+	} 
+	if (valueA > valueB) {
+		return 1;
+	}
+	return 0;
+}
+
+// Funktionen som jämför datumen med varandra
+function compareDate(a,b) {
+
+	var valueA = new Date(a.querySelectorAll('p')[0].innerHTML.replace("Start datum: ", ""));
+	var valueB = new Date(b.querySelectorAll('p')[0].innerHTML.replace("Start datum: ", ""));
+	
+	if (valueA < valueB) {
+		return -1;
+	}
+	if (valueA > valueB) {
+		return 1;
+	}
+	return 0;
+}
+
+// Funktionen som kallar på compareDate() eller comparePrice() beroende på vilken knapp du trycker
+function sort(orderBy){
+	// Omvandlar items till en array 
+	const items = Array.prototype.slice.call(document.querySelectorAll('.auktion-div'));
+	// Tömmer hela listan för att kunna displaya det användaren sökt
+	document.querySelector('#titel').innerHTML = '';
+
+    // Om användaren klickar på Pris knappen så kallar sort funktionen på comparePrice()
+    if(orderBy === 'price'){
+    	items.sort(comparePrice);
+    }	
+	// Om användaren klickar på Datum knappen så kallar sort funktionen på compareDate()
+	else if (orderBy === 'date') {
+		items.sort(compareDate);
+	}
+
+	//Displayar så användaren kan se resultatet på sökningen 
+	for (const item of items){
+		document.querySelector('#titel').appendChild(item);
+	}
+}
