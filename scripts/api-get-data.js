@@ -1,4 +1,9 @@
 GetData();
+
+document.getElementById("button").addEventListener("click", searchFunction);
+document.getElementById("sort-price").addEventListener("click", function(){sort("price")});
+document.getElementById("sort-date").addEventListener("click", function(){sort("date")});
+
 async function GetData() {
 	let auktion = await fetchData('http://nackowskis.azurewebsites.net/api/Auktion/600/');
 	let bud = await fetchData('http://nackowskis.azurewebsites.net/api/Bud/600/6/');
@@ -97,7 +102,7 @@ function deleteData(){
 
 
 // SÖK funktionen
-function myFunction() {
+function searchFunction() {
 
   var input = document.getElementById("Search");
   var filter = input.value.toLowerCase();
