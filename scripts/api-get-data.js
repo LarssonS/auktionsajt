@@ -146,7 +146,6 @@ auktionDiv.appendChild(bidhide);
     bids[i].style.display = 'none'; 
     bidhide.style.display = 'none'; 
     auktionBtnShowBids.style.visibility = 'visible';
-    bidWin.style.display = 'none'; 
     
 
 }
