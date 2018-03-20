@@ -1,9 +1,9 @@
-
-
-/*document.getElementById("button").addEventListener("click", searchFunction);
-document.getElementById("sort-price").addEventListener("click", function(){sort("price")});
-document.getElementById("sort-date").addEventListener("click", function(){sort("date")});*/
  GetData();
+
+document.getElementById("button").addEventListener("click", searchFunction);
+document.getElementById("sort-price").addEventListener("click", function(){sort("price")});
+document.getElementById("sort-date").addEventListener("click", function(){sort("date")});
+
  async function GetData() {
  	let auktion = await fetchData('https://nackowskis.azurewebsites.net/api/Auktion/600/');
  	
@@ -89,7 +89,7 @@ document.getElementById("sort-date").addEventListener("click", function(){sort("
  		auktionBtnShowBids.classList.add("bid-container");
  		auktionBtnShowBids.classList.add("bid-button");
 
- 				auktionBtnShowBids.onclick = function(){
+ 	auktionBtnShowBids.onclick = function(){
 
     auktionBtnShowBids.style.visibility = "hidden";
 }
@@ -128,6 +128,7 @@ document.getElementById("sort-date").addEventListener("click", function(){sort("
  				bidDiv.appendChild(bidP);
  				auktionDiv.appendChild(bidDiv);
 
+
  			})
 
 var bidhide = document.createElement("button");
@@ -145,6 +146,7 @@ auktionDiv.appendChild(bidhide);
     bids[i].style.display = 'none'; 
     bidhide.style.display = 'none'; 
     auktionBtnShowBids.style.visibility = 'visible';
+    bidWin.style.display = 'none'; 
     
 
 }
@@ -207,7 +209,7 @@ function addBids(auctionId, bidValue){
 }
 
 // SÖK funktionen
-function myFunction() {
+function searchFunction() {
 
 	var input = document.getElementById("Search");
 	var filter = input.value.toLowerCase();
